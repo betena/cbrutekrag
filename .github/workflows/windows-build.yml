@@ -19,9 +19,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Bootstrap fresh vcpkg
+        run: |
+          cd $env:VCPKG_INSTALLATION_ROOT
+          git pull
+          .\bootstrap-vcpkg.bat
+        shell: pwsh
+
       - name: Set up vcpkg
         uses: lukka/run-vcpkg@v11
         with:
+          vcpkgDirectory: '${{ env.VCPKG_INSTALLATION_ROOT }}' # Указывает экшену использовать обновленный системный vcpkg
           vcpkgCommitId: ''
           runVcpkgInstall: true
 
