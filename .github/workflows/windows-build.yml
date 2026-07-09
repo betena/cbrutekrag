@@ -1,12 +1,7 @@
 name: Windows CMake Build
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,7 +22,7 @@ jobs:
       - name: Set up vcpkg
         uses: lukka/run-vcpkg@v11
         with:
-          vcpkgCommitId: 'latest'
+          vcpkgCommitId: ''
           runVcpkgInstall: true
 
       - name: Configure with CMake
